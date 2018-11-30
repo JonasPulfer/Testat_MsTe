@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using AutoReservation.Dal.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
@@ -29,59 +30,103 @@ namespace AutoReservation.Dal
             }
         }
 
-        protected override void OnModelCreating(Modelbuilder modelbuilder)
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
+    
 
             modelbuilder.Entity<Kunde>()
-                .HasKey(t => new { t.Id })
+                .HasKey(t => new { t.Id });
+
+            modelbuilder.Entity<Kunde>()
                 .Property(e => e.Vorname)
-                .HasColumnType("NVARCHAR(20)")
-                .IsRequired()
+                .HasMaxLength(20)
+                .IsRequired();
+
+            modelbuilder.Entity<Kunde>()
                 .Property(e => e.Nachname)
-                .HasColumnType("NVARCHAR(20)")
-                .IsRequired()
+                .HasMaxLength(20)
+                .IsRequired();
+
+            modelbuilder.Entity<Kunde>()
                 .Property(e => e.Geburtsdatum)
                 .HasColumnType("datetime2(7)")
-                .IsRequired()
+                .IsRequired();
+
+            modelbuilder.Entity<Kunde>()
                 .Property(e => e.RowVersion)
                 .HasColumnType("timestamp");
 
             modelbuilder.Entity<Auto>()
-                .HasKey(t => new { t.Id })
-                .Property(e => e.MARKE)
-                .HasColumnType("NVARCHAR(20)")
-                .IsRequired()
+                .HasKey(t => new { t.Id });
+
+            modelbuilder.Entity<Auto>()
+                .Property(e => e.Marke)
+                .HasMaxLength(20)
+                .IsRequired();
+
+            modelbuilder.Entity<Auto>()
                 .Property(e => e.Tagestarif)
                 .HasColumnType("int")
-                .IsRequired()
+                .IsRequired();
+
+            modelbuilder.Entity<Auto>()
                 .Property(e => e.RowVersion)
-                .HasColumnType("timestamp")
+                .HasColumnType("timestamp");
+
+            modelbuilder.Entity<Auto>()
                 .Property(e => e.AutoKlasse)
                 .HasColumnType("int")
-                .IsRequired()
+                .IsRequired();
+
+            modelbuilder.Entity<Auto>()
                 .Property(e => e.Basistarif)
                 .HasColumnType("int");
 
             modelbuilder.Entity<Reservation>()
-                .HashKey(t => new { t.ReservationsNr })
+                .HasKey(t => new { t.ReservationsNr });
+
+            modelbuilder.Entity<Reservation>()
+                .HasOne(k => k.Kunde)
+                .WithMany(k => k.Reservationen)
+                .HasForeignKey(d => d.KundeId)
+                .IsRequired();
+
+            modelbuilder.Entity<Reservation>()
+                .HasOne(k => k.Auto)
+                .WithMany(k => k.Reservationen)
+                .HasForeignKey(d => d.AutoId)
+                .IsRequired();
+
+            modelbuilder.Entity<Reservation>()
                 .Property(e => e.AutoId)
                 .HasColumnType("int")
-                .isRequired()
-                 .Property(e => e.KundeId)
+                .IsRequired();
+
+            modelbuilder.Entity<Reservation>()
+                .Property(e => e.KundeId)
                 .HasColumnType("int")
-                .isRequired()
+                .IsRequired();
+
+            modelbuilder.Entity<Reservation>()
                 .Property(e => e.Von)
                 .HasColumnType("datetime2(7)")
-                .isRequired()
+                .IsRequired();
+
+            modelbuilder.Entity<Reservation>()
                 .Property(e => e.Bis)
                 .HasColumnType("datetime2(7)")
-                .isRequired()
+                .IsRequired();
+
+            modelbuilder.Entity<Reservation>()
                 .Property(e => e.RowVersion)
                 .HasColumnType("timestamp");
 
-
-
-
+            modelbuilder.Entity<Auto>()
+                .HasDiscriminator<int>("AutoKlasse")
+                .HasValue<Auto>(0)
+                .HasValue<StandardAuto>(1)
+                .HasValue<LuxusklasseAuto>(2)
+                .HasValue<MittelklasseAuto>(3);
         }
     }
 }

@@ -1,6 +1,9 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace AutoReservation.Dal.Entities
 {
-    public class Reservation
+    public partial class Reservation
     {
         public int ReservationsNr { get; set; }
 
@@ -8,7 +11,7 @@ namespace AutoReservation.Dal.Entities
 
         public Auto Auto { get; set; }
 
-        public int KundeID { get; set; }
+        public int KundeId { get; set; }
 
         public Kunde Kunde { get; set; }
 

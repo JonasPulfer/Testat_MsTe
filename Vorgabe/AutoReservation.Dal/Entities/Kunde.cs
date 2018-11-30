@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace AutoReservation.Dal.Entities
 {
     public class Kunde
@@ -12,6 +15,6 @@ namespace AutoReservation.Dal.Entities
 
         public byte[] RowVersion { get; set; } //Nullable
 
-        public ICollection<Reservation> Reservation { get; set; }
+        public ICollection<Reservation> Reservationen { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    ".NETFramework,Version=v4.7.1": {
+    ".NETFramework,Version=v4.6.1": {
       "Microsoft.EntityFrameworkCore/2.1.4": {
         "type": "package",
         "dependencies": {
@@ -950,7 +950,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    ".NETFramework,Version=v4.7.1": [
+    ".NETFramework,Version=v4.6.1": [
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.1.4",
       "Microsoft.Extensions.Logging.Console >= 2.1.1"
     ]
@@ -976,14 +976,14 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net471"
+        "net461"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net471": {
+        "net461": {
           "projectReferences": {}
         }
       },
@@ -994,7 +994,7 @@
       }
     },
     "frameworks": {
-      "net471": {
+      "net461": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",

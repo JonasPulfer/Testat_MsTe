@@ -1,6 +1,8 @@
+using System.Collections.Generic;
+
 namespace AutoReservation.Dal.Entities
 {
-    public class Auto
+    public abstract class Auto
     {
         public int Id { get; set; }
 
@@ -14,6 +16,6 @@ namespace AutoReservation.Dal.Entities
 
         public int? Basistarif { get; set; } //existiert nur für Luxusklassen
 
-        public ICollection<Reservation> Reservation { get; set; }
+        public ICollection<Reservation> Reservationen { get; set; }
     }
 }
