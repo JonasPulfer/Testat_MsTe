@@ -8,23 +8,23 @@
     ".NETFramework,Version=v4.7.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Portuga\\.nuget\\packages\\": {},
+    "C:\\Users\\Jonas\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\AndroidStudioProjects\\Testat_MsTe\\Vorgabe\\AutoReservation.Common\\AutoReservation.Common.csproj",
+      "projectUniqueName": "D:\\HSR\\Sem3\\MsTe\\Testat\\Vorgabe\\AutoReservation.Common\\AutoReservation.Common.csproj",
       "projectName": "AutoReservation.Common",
-      "projectPath": "E:\\AndroidStudioProjects\\Testat_MsTe\\Vorgabe\\AutoReservation.Common\\AutoReservation.Common.csproj",
-      "packagesPath": "C:\\Users\\Portuga\\.nuget\\packages\\",
-      "outputPath": "E:\\AndroidStudioProjects\\Testat_MsTe\\Vorgabe\\AutoReservation.Common\\obj\\",
+      "projectPath": "D:\\HSR\\Sem3\\MsTe\\Testat\\Vorgabe\\AutoReservation.Common\\AutoReservation.Common.csproj",
+      "packagesPath": "C:\\Users\\Jonas\\.nuget\\packages\\",
+      "outputPath": "D:\\HSR\\Sem3\\MsTe\\Testat\\Vorgabe\\AutoReservation.Common\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Portuga\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Jonas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
