@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutoReservation.Dal.Entities
 {
-    class StandardAuto : Auto
+    public class StandardAuto : Auto
     {
 
     }

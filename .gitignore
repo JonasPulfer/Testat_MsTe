@@ -343,3 +343,6 @@ ASALocalRun/
 .localhistory/
 
 # End of https://www.gitignore.io/api/visualstudio
+Vorgabe/.vs/AutoReservation/v15/.suo
+Vorgabe/.vs/AutoReservation/v15/Server/sqlite3/storage.ide-shm
+Vorgabe/.vs/AutoReservation/v15/Server/sqlite3/storage.ide-wal

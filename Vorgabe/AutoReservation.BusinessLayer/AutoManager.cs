@@ -22,7 +22,7 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public Auto getEntityByKey(int key)
+        public Auto GetById(int key)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
@@ -45,11 +45,13 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public void insert(Auto autoToBeUpdated)
+        public void Update(Auto AutoToBeUpdated, Auto AutoUpdated)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
-                context.Entry(autoToBeInserted).State = EntityState.Added;
+                AutoToBeUpdated = AutoUpdated;
+
+                context.Entry(AutoToBeUpdated).State = EntityState.Modified;
 
                 context.SaveChanges();
 
