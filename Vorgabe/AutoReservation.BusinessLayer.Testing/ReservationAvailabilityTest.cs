@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoReservation.Dal.Entities;
 using AutoReservation.TestEnvironment;
 using Xunit;
 
@@ -22,7 +23,11 @@ namespace AutoReservation.BusinessLayer.Testing
         [Fact]
         public void ScenarioOkay01Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            
+            Reservation res = Target.GetById(2);
+            res.Bis = new DateTime(2020, 05, 15);
+            
+            //Assert.Throws(AutoUnavailableException, Target.Update(res));
         }
 
         [Fact]

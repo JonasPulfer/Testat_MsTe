@@ -54,7 +54,8 @@ namespace AutoReservation.Dal
 
             modelbuilder.Entity<Kunde>()
                 .Property(e => e.RowVersion)
-                .HasColumnType("timestamp");
+                .IsRowVersion();
+            //.HasColumnType("timestamp");
 
             modelbuilder.Entity<Auto>()
                 .HasKey(t => new { t.Id });
@@ -71,7 +72,8 @@ namespace AutoReservation.Dal
 
             modelbuilder.Entity<Auto>()
                 .Property(e => e.RowVersion)
-                .HasColumnType("timestamp");
+                .IsRowVersion();
+            //.HasColumnType("timestamp");
 
             modelbuilder.Entity<Auto>()
                 .Property(e => e.AutoKlasse)
@@ -119,11 +121,12 @@ namespace AutoReservation.Dal
 
             modelbuilder.Entity<Reservation>()
                 .Property(e => e.RowVersion)
-                .HasColumnType("timestamp");
+                .IsRowVersion();
+                //.HasColumnType("timestamp");
 
             modelbuilder.Entity<Auto>()
                 .HasDiscriminator<int>("AutoKlasse")
-                .HasValue<Auto>(0)
+                //.HasValue<Auto>(0)
                 .HasValue<StandardAuto>(1)
                 .HasValue<LuxusklasseAuto>(2)
                 .HasValue<MittelklasseAuto>(3);

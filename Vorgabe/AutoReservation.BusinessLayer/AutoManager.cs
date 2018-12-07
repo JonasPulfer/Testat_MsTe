@@ -33,7 +33,7 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public void insert(Auto autoToBeInserted)
+        public void Insert(Auto autoToBeInserted)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
@@ -45,11 +45,10 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public void Update(Auto AutoToBeUpdated, Auto AutoUpdated)
+        public void Update(Auto AutoToBeUpdated)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
-                AutoToBeUpdated = AutoUpdated;
 
                 context.Entry(AutoToBeUpdated).State = EntityState.Modified;
 
