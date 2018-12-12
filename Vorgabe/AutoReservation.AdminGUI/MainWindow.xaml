@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
@@ -15,10 +16,102 @@
     <Grid Background="{StaticResource BackgroundColorMainWindow}">
         <TabControl TabStripPlacement="Left" Background="{StaticResource BackgroundColorMainWindow}">
             <TabItem Header="Autos">
+                <DockPanel Dock="Left">
+                    <StackPanel Width="250">
+                        <Label Content="Autos:" FontSize="15" Margin="10 0 0 0"></Label>
+                        <ListBox Name="AutoList" ItemsSource="{Binding AllAutos}" ItemTemplate="{StaticResource AutoTemplate}" Margin="10 0 10 0">
 
+                        </ListBox>
+                        <StackPanel Orientation="Horizontal">
+                            <Button>
+                                <fa:FontAwesome Icon="PlusCircle"/>
+                            </Button>
+                            <Button>
+                                <fa:FontAwesome Icon="MinusCircle"></fa:FontAwesome>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Details:" FontSize="15" Margin="15 0 0 0"></Label>
+                        <Label Content="ID" Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding Id}"></TextBox>
+                        <Label Content="Autoklasse" Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding Autoklasse}"></TextBox>
+                        <Label Content="Marke: " Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding Marke}" ></TextBox>
+                        <Label Content="Tarif: " Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding Tagestarif}"></TextBox>
+                        <Button>
+                            <fa:FontAwesome Icon="Save"/>
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
             </TabItem>
             <TabItem Header="Kunden">
+                <DockPanel Dock="Left">
+                    <StackPanel Width="250">
+                        <Label Content="Kunden:" FontSize="15" Margin="10 0 0 0"></Label>
+                        <ListBox Name="KundenList" ItemsSource="{Binding AllKunden}" ItemTemplate="{StaticResource KundeTemplate}" Margin="10 0 10 0">
 
+                        </ListBox>
+                        <StackPanel Orientation="Horizontal">
+                            <Button>
+                                <fa:FontAwesome Icon="PlusCircle"/>
+                            </Button>
+                            <Button>
+                                <fa:FontAwesome Icon="MinusCircle"></fa:FontAwesome>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Details:" FontSize="15" Margin="15 0 0 0"></Label>
+                        <Label Content="ID" Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding Id}"></TextBox>
+                        <Label Content="Vorname" Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding Vorname}"></TextBox>
+                        <Label Content="Nachname: " Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding Nachname}" ></TextBox>
+                        <Label Content="Geburtsdatum:" Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding Geburtsdatum}"></TextBox>
+                        <Button>
+                            <fa:FontAwesome Icon="Save"/>
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Reservationen">
+                <DockPanel Dock="Left">
+                    <StackPanel Width="250">
+                        <Label Content="Reservationen:" FontSize="15" Margin="10 0 0 0"></Label>
+                        <ListBox Name="ReservationList" ItemsSource="{Binding AllReservations}" ItemTemplate="{StaticResource ReservationTemplate}" Margin="10 0 10 0">
+
+                        </ListBox>
+                        <StackPanel Orientation="Horizontal">
+                            <Button>
+                                <fa:FontAwesome Icon="PlusCircle"/>
+                            </Button>
+                            <Button>
+                                <fa:FontAwesome Icon="MinusCircle"></fa:FontAwesome>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Details:" FontSize="15" Margin="15 0 0 0"></Label>
+                        <Label Content="ReservationsNr:" Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding ReservationsNr}"></TextBox>
+                        <Label Content="Auto Id:" Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding AutoId}"></TextBox>
+                        <Label Content="Kunde Id: " Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding KundeId}" ></TextBox>
+                        <Label Content="Von: " Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding Von}"></TextBox>
+                        <Label Content="Bis: " Margin="{StaticResource DetailViewLabelMargin}"></Label>
+                        <TextBox Text="{Binding Bis}"></TextBox>
+                        <Button>
+                            <fa:FontAwesome Icon="Save"/>
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
             </TabItem>
         </TabControl>
     </Grid>

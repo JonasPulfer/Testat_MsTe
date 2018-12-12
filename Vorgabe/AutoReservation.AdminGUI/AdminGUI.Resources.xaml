@@ -3,14 +3,66 @@
                     xmlns:local="clr-namespace:AutoReservation.AdminGUI">
 
     <SolidColorBrush x:Key="BackgroundColorMainWindow" Color="#FF252526" />
+
+    <DataTemplate x:Key="AutoTemplate">
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Marke: "></Label>
+            <Label Content="{Binding Marke}"></Label>
+            <Label Content="Tarif: "></Label>
+            <Label Content="{Binding Tagestarif}"></Label>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="KundeTemplate">
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Vorname: "></Label>
+            <Label Content="{Binding Vorname}"></Label>
+            <Label Content="Nachname: "></Label>
+            <Label Content="{Binding Nachname}"></Label>
+        </StackPanel>
+    </DataTemplate>
+
+    <Thickness x:Key="DetailViewLabelMargin" Left="25" Top="0" Right="0" Bottom="0"></Thickness>
+
+    <Style TargetType="Button" >
+        <Setter Property="Template" >
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="30" BorderBrush="#1ba1e2" BorderThickness="1" Margin="2" Padding="2" >
+                        <DockPanel Height="40" Width="40" >
+                            <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+                        </DockPanel>
+                    </Border>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="#1ba1e2"/>
+        <Setter Property="Border.Background" Value="Black" />
+        <Style.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True" >
+                <Setter Property="Button.Foreground" Value="Black" />
+                <Setter Property="Button.BorderBrush" Value="red" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="TextBox">
+        <Setter Property="Margin" Value="30 0 20 0"></Setter>
+    </Style>
+
     <Style TargetType="TabControl">
         <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="Foreground" Value="White"></Setter>
     </Style>
 
     <Style TargetType="TabItem">
         <Setter Property="Background" Value="{StaticResource BackgroundColorMainWindow}" />
         <Setter Property="BorderThickness" Value="0 5" />
-        <Setter Property="Width" Value="80" />
+        <Setter Property="Width" Value="100" />
         <Setter Property="Foreground" Value="White"></Setter>
         <Setter Property="Height" Value="40"></Setter>
         <Setter Property="Template">
