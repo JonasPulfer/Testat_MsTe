@@ -18,7 +18,7 @@ namespace AutoReservation.BusinessLayer
         {
         }
 
-        protected AutoUnavailableException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public AutoUnavailableException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

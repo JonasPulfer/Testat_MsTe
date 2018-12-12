@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AutoReservation.BusinessLayer
 {
     [Serializable]
-    internal class InvalidDateRangeException : Exception
+    public class InvalidDateRangeException : Exception
     {
         public InvalidDateRangeException()
         {
@@ -18,7 +18,7 @@ namespace AutoReservation.BusinessLayer
         {
         }
 
-        protected InvalidDateRangeException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public InvalidDateRangeException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

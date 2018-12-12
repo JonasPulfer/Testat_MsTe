@@ -26,7 +26,7 @@ namespace AutoReservation.BusinessLayer.Testing
             
             Reservation res = Target.GetById(2);
             res.Bis = new DateTime(2020, 05, 15);
-            
+            Target.Update(res);
             //Assert.Throws(AutoUnavailableException, Target.Update(res));
         }
 
