@@ -56,5 +56,15 @@ namespace AutoReservation.BusinessLayer
 
             }
         }
+
+        public void Delete(Auto AutoToBeDeleted)
+        {
+            using (AutoReservationContext context = new AutoReservationContext())
+            {
+                context.Entry(AutoToBeDeleted).State = EntityState.Deleted;
+
+                context.SaveChanges();
+            }
+        }
     }
 }

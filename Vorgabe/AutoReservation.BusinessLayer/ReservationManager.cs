@@ -70,6 +70,16 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
+        public void Delete(Reservation ReservationToBeDeleted)
+        {
+            using (AutoReservationContext context = new AutoReservationContext())
+            {
+                context.Entry(ReservationToBeDeleted).State = EntityState.Deleted;
+
+                context.SaveChanges();
+            }
+        }
+
         public bool checkDate(Reservation reservation)
         {
             if (reservation.Bis < reservation.Von || reservation.Von == reservation.Bis)

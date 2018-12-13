@@ -44,15 +44,24 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public void Update(Kunde kundToBeUpdated)
+        public void Update(Kunde kundeToBeUpdated)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
 
-                context.Entry(kundToBeUpdated).State = EntityState.Modified;
+                context.Entry(kundeToBeUpdated).State = EntityState.Modified;
 
                 context.SaveChanges();
 
+            }
+        }
+        public void Delete(Kunde KundeToBeDeleted)
+        {
+            using (AutoReservationContext context = new AutoReservationContext())
+            {
+                context.Entry(KundeToBeDeleted).State = EntityState.Deleted;
+
+                context.SaveChanges();
             }
         }
     }
