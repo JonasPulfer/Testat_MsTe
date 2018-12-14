@@ -45,7 +45,7 @@ namespace AutoReservation.Service.Wcf
         {
             WriteActualMethod();
             try { kundeManager.Update(kundeToBeUpdated.ConvertToEntity()); }
-            catch (OptimisticConcurrencyException<KundeDto>)
+            catch (OptimisticConcurrencyException<Kunde>)
             {
                 OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
                 {
@@ -61,7 +61,7 @@ namespace AutoReservation.Service.Wcf
         {
             WriteActualMethod();
             try { kundeManager.Delete(kundeToBeDeleteed.ConvertToEntity()); }
-            catch (OptimisticConcurrencyException<KundeDto>)
+            catch (OptimisticConcurrencyException<Kunde>)
             {
                 OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
                 {
@@ -94,7 +94,7 @@ namespace AutoReservation.Service.Wcf
         {
             WriteActualMethod();
             try { autoManager.Update(autoToBeUpdated.ConvertToEntity()); }
-            catch (OptimisticConcurrencyException<AutoDto>)
+            catch (OptimisticConcurrencyException<Auto>)
             {
                 OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
                 {
@@ -109,7 +109,7 @@ namespace AutoReservation.Service.Wcf
         {
             WriteActualMethod();
             try { autoManager.Delete(autoToBeDeleteed.ConvertToEntity()); }
-            catch (OptimisticConcurrencyException<AutoDto>)
+            catch (OptimisticConcurrencyException<Auto>)
             {
                 OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
                 {
@@ -178,7 +178,7 @@ namespace AutoReservation.Service.Wcf
                 };
                 throw new FaultException<InvalidDateRangeFault>(idf);
             }
-            catch (OptimisticConcurrencyException<ReservationDto>)
+            catch (OptimisticConcurrencyException<Reservation>)
             {
                 OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
                 {
@@ -193,7 +193,7 @@ namespace AutoReservation.Service.Wcf
         {
             WriteActualMethod();
             try { reservationManager.Delete(reservationToBeDeleteed.ConvertToEntity()); }
-            catch (OptimisticConcurrencyException<ReservationDto>)
+            catch (OptimisticConcurrencyException<Reservation>)
             {
                 OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
                 {
@@ -202,6 +202,16 @@ namespace AutoReservation.Service.Wcf
                 };
                 throw new FaultException<OptimisticConcurrencyFault>(ocf);
             }
+        }
+
+        public bool CheckAutoAvailability(ReservationDto reservation)
+        {
+            return reservationManager.CheckAutoAvailability(reservation.ConvertToEntity());   
+        }
+
+        public bool CheckDate(ReservationDto reservation)
+        {
+            return reservationManager.CheckDate(reservation.ConvertToEntity());   
         }
     }
 }

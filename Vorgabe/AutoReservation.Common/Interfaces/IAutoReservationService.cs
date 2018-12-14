@@ -3,6 +3,7 @@ using AutoReservation.Common.DataTransferObjects.Faults;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using AutoReservation.Dal.Entities;
 
 namespace AutoReservation.Common.Interfaces
 {
@@ -51,5 +52,10 @@ namespace AutoReservation.Common.Interfaces
         [OperationContract]
         [FaultContract(typeof(OptimisticConcurrencyFault))]
         void DeleteReservation(ReservationDto reservationToBeDeleteed);
+
+        [OperationContract]
+        bool CheckAutoAvailability(ReservationDto reservation);
+        [OperationContract]
+        bool CheckDate(ReservationDto reservation);
     }
 }

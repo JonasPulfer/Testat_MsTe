@@ -49,11 +49,16 @@ namespace AutoReservation.BusinessLayer
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
+                try
+                {
+                    context.Entry(AutoToBeUpdated).State = EntityState.Modified;
 
-                context.Entry(AutoToBeUpdated).State = EntityState.Modified;
-
-                context.SaveChanges();
-
+                    context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw CreateOptimisticConcurrencyException(context, AutoToBeUpdated);
+                }
             }
         }
 

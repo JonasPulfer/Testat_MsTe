@@ -17,7 +17,9 @@ namespace AutoReservation.BusinessLayer
             {
                 using (AutoReservationContext context = new AutoReservationContext())
                 {
-                    return context.Reservationen.ToList();
+                    return context.Reservationen
+                        .Include(r => r.Auto)
+                        .Include(r => r.Kunde).ToList();
                 }
             }
         }
@@ -28,6 +30,8 @@ namespace AutoReservation.BusinessLayer
             {
                 Reservation reservation = context
                      .Reservationen
+                    .Include(r => r.Auto)
+                    .Include(r => r.Kunde)
                      .SingleOrDefault(r => r.ReservationsNr == key);
                 return reservation;
             }
@@ -69,10 +73,15 @@ namespace AutoReservation.BusinessLayer
 
             using (AutoReservationContext context = new AutoReservationContext())
             {
-                context.Entry(reservationToBeUpdated).State = EntityState.Modified;
+                try
+                {
+                    context.Entry(reservationToBeUpdated).State = EntityState.Modified;
 
-                context.SaveChanges();
-
+                    context.SaveChanges();
+                } catch (DbUpdateConcurrencyException)
+                {
+                    throw CreateOptimisticConcurrencyException(context, reservationToBeUpdated);
+                }
             }
         }
 
