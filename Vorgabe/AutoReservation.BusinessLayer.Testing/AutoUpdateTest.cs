@@ -16,10 +16,10 @@ namespace AutoReservation.BusinessLayer.Testing
         {
             
             Auto result = Target.GetById(1);
-            result.Marke = "Fiat Punto";
+            result.Marke = "Ferrari";
             Target.Update(result);
 
-            Assert.Equal("Fiat Punto", result.Marke);
+            Assert.Equal("Ferrari", result.Marke);
         }
     }
 }

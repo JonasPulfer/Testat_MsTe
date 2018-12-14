@@ -14,8 +14,12 @@ namespace AutoReservation.BusinessLayer.Testing
         [Fact]
         public void UpdateReservationTest()
         {
-            throw new NotImplementedException("Test not implemented.");
-            
+            Reservation result = Target.GetById(4);
+            result.Bis = new DateTime(2020, 06, 20);
+            Target.Update(result);
+
+            Assert.Equal("20.06.2020 00:00:00", result.Bis.ToString());
+
         }
     }
 }
