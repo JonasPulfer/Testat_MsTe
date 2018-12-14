@@ -1,10 +1,13 @@
 ﻿using AutoReservation.BusinessLayer;
+using AutoReservation.Common.DataTransferObjects.Faults;
+using AutoReservation.BusinessLayer.Exceptions;
 using AutoReservation.Common.DataTransferObjects;
 using AutoReservation.Common.Interfaces;
 using AutoReservation.Dal.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.ServiceModel;
 
 namespace AutoReservation.Service.Wcf
 {
@@ -34,18 +37,39 @@ namespace AutoReservation.Service.Wcf
         {
             WriteActualMethod();
             kundeManager.Insert(kundeToBeInserted.ConvertToEntity());
+          
+            
         }
 
         public void UpdateKunde(KundeDto kundeToBeUpdated)
         {
             WriteActualMethod();
-            kundeManager.Update(kundeToBeUpdated.ConvertToEntity());
+            try { kundeManager.Update(kundeToBeUpdated.ConvertToEntity()); }
+            catch (OptimisticConcurrencyException<KundeDto>)
+            {
+                OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
+                {
+                    Operation = "Update",
+                    ProblemType = "Optimstic Cocurrency Error during updating on Kunde!"
+                };
+                throw new FaultException<OptimisticConcurrencyFault>(ocf);
+            }
+            
         }
 
         public void DeleteKunde(KundeDto kundeToBeDeleteed)
         {
             WriteActualMethod();
-            kundeManager.Delete(kundeToBeDeleteed.ConvertToEntity());
+            try { kundeManager.Delete(kundeToBeDeleteed.ConvertToEntity()); }
+            catch (OptimisticConcurrencyException<KundeDto>)
+            {
+                OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
+                {
+                    Operation = "Delete",
+                    ProblemType = "Optimstic Cocurrency Error during deleting on Kunde!"
+                };
+                throw new FaultException<OptimisticConcurrencyFault>(ocf);
+            }
         }
 
         public AutoDto GetAutoById(int autoId)
@@ -69,13 +93,31 @@ namespace AutoReservation.Service.Wcf
         public void UpdateAuto(AutoDto autoToBeUpdated)
         {
             WriteActualMethod();
-            autoManager.Update(autoToBeUpdated.ConvertToEntity());
+            try { autoManager.Update(autoToBeUpdated.ConvertToEntity()); }
+            catch (OptimisticConcurrencyException<AutoDto>)
+            {
+                OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
+                {
+                    Operation = "Update",
+                    ProblemType = "Optimstic Cocurrency Error during updating on Auto!"
+                };
+                throw new FaultException<OptimisticConcurrencyFault>(ocf);
+            }
         }
 
         public void DeleteAuto(AutoDto autoToBeDeleteed)
         {
             WriteActualMethod();
-            autoManager.Delete(autoToBeDeleteed.ConvertToEntity());
+            try { autoManager.Delete(autoToBeDeleteed.ConvertToEntity()); }
+            catch (OptimisticConcurrencyException<AutoDto>)
+            {
+                OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
+                {
+                    Operation = "Delete",
+                    ProblemType = "Optimstic Cocurrency Error during deleting on Auto!"
+                };
+                throw new FaultException<OptimisticConcurrencyFault>(ocf);
+            }
         }
 
         public ReservationDto GetReservationById(int reservationId)
@@ -93,19 +135,73 @@ namespace AutoReservation.Service.Wcf
         public void InsertReservation(ReservationDto reservationToBeInserted)
         {
             WriteActualMethod();
-            reservationManager.Insert(reservationToBeInserted.ConvertToEntity());
+            try { reservationManager.Insert(reservationToBeInserted.ConvertToEntity()); }
+            catch (AutoUnavailableException)
+            {
+                AutoUnavailableFault auf = new AutoUnavailableFault
+                {
+                    Operation = "Insert",
+                    ProblemType = "Auto is not available during this Time Range!"
+                };
+                throw new FaultException<AutoUnavailableFault>(auf);
+            }
+            catch (InvalidDateRangeException)
+            {
+                InvalidDateRangeFault idf = new InvalidDateRangeFault
+                {
+                    Operation = "Insert",
+                    ProblemType = "Date is invalid!"
+                };
+                throw new FaultException<InvalidDateRangeFault>(idf);
+            }
         }
 
         public void UpdateReservationo(ReservationDto reservationToBeUpdated)
         {
             WriteActualMethod();
-            reservationManager.Update(reservationToBeUpdated.ConvertToEntity());
+            try { reservationManager.Update(reservationToBeUpdated.ConvertToEntity()); }
+            catch (AutoUnavailableException)
+            {
+                AutoUnavailableFault auf = new AutoUnavailableFault
+                {
+                    Operation = "Insert",
+                    ProblemType = "Auto is not available during this Time Range!"
+                };
+                throw new FaultException<AutoUnavailableFault>(auf);
+            }
+            catch (InvalidDateRangeException)
+            {
+                InvalidDateRangeFault idf = new InvalidDateRangeFault
+                {
+                    Operation = "Insert",
+                    ProblemType = "Date is invalid!"
+                };
+                throw new FaultException<InvalidDateRangeFault>(idf);
+            }
+            catch (OptimisticConcurrencyException<ReservationDto>)
+            {
+                OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
+                {
+                    Operation = "Update",
+                    ProblemType = "Optimstic Cocurrency Error during updating on Reservation!"
+                };
+                throw new FaultException<OptimisticConcurrencyFault>(ocf);
+            }
         }
 
         public void DeleteReservation(ReservationDto reservationToBeDeleteed)
         {
             WriteActualMethod();
-            reservationManager.Delete(reservationToBeDeleteed.ConvertToEntity());
+            try { reservationManager.Delete(reservationToBeDeleteed.ConvertToEntity()); }
+            catch (OptimisticConcurrencyException<ReservationDto>)
+            {
+                OptimisticConcurrencyFault ocf = new OptimisticConcurrencyFault
+                {
+                    Operation = "Delete",
+                    ProblemType = "Optimstic Cocurrency Error during deleting on Reservation!"
+                };
+                throw new FaultException<OptimisticConcurrencyFault>(ocf);
+            }
         }
     }
 }

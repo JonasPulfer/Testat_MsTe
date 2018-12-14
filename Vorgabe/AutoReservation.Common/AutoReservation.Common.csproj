@@ -7,9 +7,6 @@
      <Reference Include="System.ServiceModel" />
    </ItemGroup>
    <ItemGroup>
-     <Folder Include="DataTransferObjects\Faults\" />
-   </ItemGroup>
-   <ItemGroup>
      <ProjectReference Include="..\AutoReservation.Dal\AutoReservation.Dal.csproj" />
    </ItemGroup>
 </Project>

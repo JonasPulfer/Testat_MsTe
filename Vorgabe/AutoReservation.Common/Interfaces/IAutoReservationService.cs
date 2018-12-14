@@ -1,4 +1,5 @@
 ﻿using AutoReservation.Common.DataTransferObjects;
+using AutoReservation.Common.DataTransferObjects.Faults;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -15,8 +16,10 @@ namespace AutoReservation.Common.Interfaces
         [OperationContract]
         void InsertKunde(KundeDto kundeToBeInserted);
         [OperationContract]
+        [FaultContract(typeof(OptimisticConcurrencyFault))]
         void UpdateKunde(KundeDto kundeToBeUpdated);
         [OperationContract]
+        [FaultContract(typeof(OptimisticConcurrencyFault))]
         void DeleteKunde(KundeDto kundeToBeDeleteed);
 
         [OperationContract]
@@ -26,8 +29,10 @@ namespace AutoReservation.Common.Interfaces
         [OperationContract]
         void InsertAuto(AutoDto autoToBeInserted);
         [OperationContract]
+        [FaultContract(typeof(OptimisticConcurrencyFault))]
         void UpdateAuto(AutoDto autoToBeUpdated);
         [OperationContract]
+        [FaultContract(typeof(OptimisticConcurrencyFault))]
         void DeleteAuto(AutoDto autoToBeDeleteed);
 
         [OperationContract]
@@ -35,10 +40,16 @@ namespace AutoReservation.Common.Interfaces
         [OperationContract]
         List<ReservationDto> GetReservationList();
         [OperationContract]
+        [FaultContract(typeof(AutoUnavailableFault))]
+        [FaultContract(typeof(InvalidDateRangeFault))]
         void InsertReservation(ReservationDto reservationToBeInserted);
         [OperationContract]
+        [FaultContract(typeof(AutoUnavailableFault))]
+        [FaultContract(typeof(InvalidDateRangeFault))]
+        [FaultContract(typeof(OptimisticConcurrencyFault))]
         void UpdateReservationo(ReservationDto reservationToBeUpdated);
         [OperationContract]
+        [FaultContract(typeof(OptimisticConcurrencyFault))]
         void DeleteReservation(ReservationDto reservationToBeDeleteed);
     }
 }
