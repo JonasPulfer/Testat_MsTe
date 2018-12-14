@@ -64,7 +64,7 @@ namespace AutoReservation.BusinessLayer
 
             if(!CheckAutoAvailability(reservationToBeUpdated))
             {
-                throw new AutoUnavailableException("Auto is unvailable!");
+                throw new AutoUnavailableException("Auto is unavailable!");
             }
 
             using (AutoReservationContext context = new AutoReservationContext())
