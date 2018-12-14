@@ -156,7 +156,7 @@ namespace AutoReservation.Service.Wcf
             }
         }
 
-        public void UpdateReservationo(ReservationDto reservationToBeUpdated)
+        public void UpdateReservation(ReservationDto reservationToBeUpdated)
         {
             WriteActualMethod();
             try { reservationManager.Update(reservationToBeUpdated.ConvertToEntity()); }

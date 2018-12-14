@@ -28,7 +28,7 @@ namespace AutoReservation.BusinessLayer
             {
                 Auto auto = context
                      .Autos
-                     .Single(a => a.Id == key);
+                     .SingleOrDefault(a => a.Id == key);
                 return auto;
             }
         }

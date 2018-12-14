@@ -27,7 +27,7 @@ namespace AutoReservation.BusinessLayer
             {
                 Kunde kunde = context
                      .Kunden
-                     .Single(k => k.Id == key);
+                     .SingleOrDefault(k => k.Id == key);
                 return kunde;
             }
         }

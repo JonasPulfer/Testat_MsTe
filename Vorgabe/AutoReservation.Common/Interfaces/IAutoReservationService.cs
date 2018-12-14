@@ -47,7 +47,7 @@ namespace AutoReservation.Common.Interfaces
         [FaultContract(typeof(AutoUnavailableFault))]
         [FaultContract(typeof(InvalidDateRangeFault))]
         [FaultContract(typeof(OptimisticConcurrencyFault))]
-        void UpdateReservationo(ReservationDto reservationToBeUpdated);
+        void UpdateReservation(ReservationDto reservationToBeUpdated);
         [OperationContract]
         [FaultContract(typeof(OptimisticConcurrencyFault))]
         void DeleteReservation(ReservationDto reservationToBeDeleteed);

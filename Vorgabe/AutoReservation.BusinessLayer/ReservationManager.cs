@@ -1,4 +1,5 @@
-﻿using AutoReservation.Dal;
+﻿using System;
+using AutoReservation.Dal;
 using AutoReservation.Dal.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace AutoReservation.BusinessLayer
             {
                 Reservation reservation = context
                      .Reservationen
-                     .Single(r => r.ReservationsNr == key);
+                     .SingleOrDefault(r => r.ReservationsNr == key);
                 return reservation;
             }
         }
@@ -87,7 +88,7 @@ namespace AutoReservation.BusinessLayer
 
         public bool CheckDate(Reservation reservation)
         {
-            if (reservation.Bis < reservation.Von || reservation.Von == reservation.Bis)
+            if (reservation.Bis < reservation.Von || reservation.Bis - reservation.Von < TimeSpan.FromDays(1))
             {
                return false;
             }

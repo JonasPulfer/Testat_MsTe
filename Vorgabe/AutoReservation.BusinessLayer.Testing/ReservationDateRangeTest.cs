@@ -34,19 +34,28 @@ namespace AutoReservation.BusinessLayer.Testing
         [Fact]
         public void ScenarioNotOkay01Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation res = Target.GetById(1);
+            res.Von = new DateTime(2020, 10, 10);
+            res.Bis = new DateTime(2020, 10, 09);
+            Assert.Throws<InvalidDateRangeException>(() => Target.Update(res));
         }
 
         [Fact]
         public void ScenarioNotOkay02Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation res = Target.GetById(1);
+            res.Von = new DateTime(2020, 10, 10, 00, 00, 00);
+            res.Bis = new DateTime(2020, 10, 10, 23, 59, 59);
+            Assert.Throws<InvalidDateRangeException>(() => Target.Update(res));
         }
 
         [Fact]
         public void ScenarioNotOkay03Test()
         {
-            throw new NotImplementedException("Test not implemented.");
+            Reservation res = Target.GetById(1);
+            res.Von = new DateTime(2020, 10, 10, 00, 00, 00);
+            res.Bis = new DateTime(2020, 10, 10, 00, 00, 00);
+            Assert.Throws<InvalidDateRangeException>(() => Target.Update(res));
         }
     }
 }
