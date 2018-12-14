@@ -34,9 +34,14 @@ namespace AutoReservation.BusinessLayer
 
         public void Insert(Reservation reservationToBeInserted)
         {
-            if (!checkDate(reservationToBeInserted))
+            if (!CheckDate(reservationToBeInserted))
             {
                 throw new InvalidDateRangeException("Invalid Date Range!");
+            }
+
+            if (!CheckAutoAvailability(reservationToBeInserted))
+            {
+                throw new AutoUnavailableException("Auto is not available");
             }
 
             using (AutoReservationContext context = new AutoReservationContext())
@@ -51,12 +56,12 @@ namespace AutoReservation.BusinessLayer
 
         public void Update(Reservation reservationToBeUpdated)
         {
-            if(!checkDate(reservationToBeUpdated))
+            if(!CheckDate(reservationToBeUpdated))
             {
                 throw new InvalidDateRangeException("Invalid Date Range!");
             }
 
-            if(!checkAutoAvailability(reservationToBeUpdated))
+            if(!CheckAutoAvailability(reservationToBeUpdated))
             {
                 throw new AutoUnavailableException("Auto is unvailable!");
             }
@@ -80,7 +85,7 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public bool checkDate(Reservation reservation)
+        public bool CheckDate(Reservation reservation)
         {
             if (reservation.Bis < reservation.Von || reservation.Von == reservation.Bis)
             {
@@ -90,7 +95,7 @@ namespace AutoReservation.BusinessLayer
             return true;
         }
 
-        public bool checkAutoAvailability(Reservation reservation)
+        public bool CheckAutoAvailability(Reservation reservation)
         {
             using (AutoReservationContext context = new AutoReservationContext())
             {
@@ -101,12 +106,13 @@ namespace AutoReservation.BusinessLayer
                      .ToList();
                 foreach(Reservation res in reservations)
                 {
-                    if((res.Bis > reservation.Von && res.Von < reservation.Von) ||
-                         (res.Von > reservation.Von && res.Bis < reservation.Bis) ||
-                         (res.Von < reservation.Bis && res.Bis > reservation.Bis) ||
-                         (res.Von < reservation.Von && res.Bis > reservation.Bis))
+                    if (res.ReservationsNr != reservation.ReservationsNr)
                     {
-                        return false;
+                        if ((reservation.Von < res.Bis && reservation.Bis > res.Bis) || 
+                            (reservation.Bis > res.Von && reservation.Von < res.Bis))
+                        {
+                            return false;
+                        }
                     }
                 }
             }

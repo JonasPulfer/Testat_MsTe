@@ -27,8 +27,8 @@ namespace AutoReservation.TestEnvironment
                 {
                     using (AutoReservationContext context = new AutoReservationContext())
                     {
-                        //context.Database.EnsureDeleted();
-                        //context.Database.EnsureCreated();
+                        context.Database.EnsureDeleted();
+                        context.Database.EnsureCreated();
                         context.InitializeTestData();
                         firstTestInExecution = false;
                         return;
