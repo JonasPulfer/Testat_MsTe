@@ -18,9 +18,7 @@ namespace AutoReservation.AdminGUI
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            ChannelFactory<IAutoReservationService> channelFactory = new ChannelFactory<IAutoReservationService>("AutoReservationService");
-            var client = channelFactory.CreateChannel();
+           
 
         }
     }

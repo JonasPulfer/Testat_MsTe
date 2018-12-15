@@ -5,20 +5,25 @@
     <SolidColorBrush x:Key="BackgroundColorMainWindow" Color="#FF252526" />
 
     <DataTemplate x:Key="AutoTemplate">
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Marke: "></Label>
-            <Label Content="{Binding Marke}"></Label>
-            <Label Content="Tarif: "></Label>
-            <Label Content="{Binding Tagestarif}"></Label>
+        <StackPanel Orientation="Horizontal" Height="25">
+            <Label Content="Marke: " Foreground="Black"></Label>
+            <Label Content="{Binding Marke}" Foreground="Black"></Label>
+            <Label Content="Tarif: " Foreground="Black"></Label>
+            <Label Content="{Binding Tagestarif}" Foreground="Black"></Label>
         </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="KundeTemplate">
         <StackPanel Orientation="Horizontal">
-            <Label Content="Vorname: "></Label>
-            <Label Content="{Binding Vorname}"></Label>
-            <Label Content="Nachname: "></Label>
-            <Label Content="{Binding Nachname}"></Label>
+            <Label Content="Vorname: " Foreground="Black"></Label>
+            <Label Content="{Binding Vorname}" Foreground="Black"></Label>
+            <Label Content="Nachname: " Foreground="Black"></Label>
+            <Label Content="{Binding Nachname}" Foreground="Black"></Label>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ReservationTemplate">
+        <StackPanel Orientation="Horizontal">
         </StackPanel>
     </DataTemplate>
 
