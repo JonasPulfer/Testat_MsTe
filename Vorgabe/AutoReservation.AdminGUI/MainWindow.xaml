@@ -28,7 +28,7 @@
                             <Button>
                                 <fa:FontAwesome Icon="PlusCircle"/>
                             </Button>
-                            <Button>
+                            <Button Name="btnDelete" Click="DeleteButton_Click">
                                 <fa:FontAwesome Icon="MinusCircle"/>
                             </Button>
                         </StackPanel>
@@ -36,14 +36,14 @@
                     <StackPanel>
                         <Label Content="Details:" FontSize="15" Margin="15 0 0 0"/>
                         <Label Content="ID" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding CurrentAuto.Id, Mode=OneWay}"/>
+                        <TextBox Text="{Binding ElementName=AutoList, Path=SelectedItem.Id ,Mode=OneWay}" IsEnabled="False"/>
                         <Label Content="Autoklasse" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding CurrentAuto.AutoKlasse, Mode=OneWay}"/>
+                        <TextBox Text="{Binding ElementName=AutoList, Path=SelectedItem.AutoKlasse, Mode=OneWay}"/>
                         <Label Content="Marke: " Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding CurrentAuto.Marke, Mode=OneWay}" />
+                        <TextBox Text="{Binding ElementName=AutoList, UpdateSourceTrigger=PropertyChanged,Path=SelectedItem.Marke, Mode=OneWay}" />
                         <Label Content="Tarif: " Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding CurrentAuto.Tagestarif, Mode=OneWay}"/>
-                        <Button>
+                        <TextBox Text="{Binding ElementName=AutoList, Path=SelectedItem.Tagestarif, Mode=OneWay}"/>
+                        <Button x:Name="btnUpdate">
                             <fa:FontAwesome Icon="Save"/>
                         </Button>
                     </StackPanel>
@@ -53,7 +53,7 @@
                 <DockPanel DockPanel.Dock="Left">
                     <StackPanel Width="250">
                         <Label Content="Kunden:" FontSize="15" Margin="10 0 0 0"/>
-                        <ListBox x:Name="KundenList" ItemsSource="{Binding AllKunden}" ItemTemplate="{StaticResource KundeTemplate}" Margin="10 0 10 0"/>
+                        <ListBox x:Name="KundenList" ItemsSource="{Binding Kunden}" ItemTemplate="{StaticResource KundeTemplate}" Margin="10 0 10 0"/>
                         <StackPanel Orientation="Horizontal">
                             <Button>
                                 <fa:FontAwesome Icon="PlusCircle"/>

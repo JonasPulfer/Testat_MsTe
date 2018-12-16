@@ -25,5 +25,6 @@ namespace AutoReservation.AdminGUI
         {
             InitializeComponent();
         }
+       
     }
 }
