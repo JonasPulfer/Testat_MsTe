@@ -23,12 +23,12 @@
                 <DockPanel DockPanel.Dock="Left">
                     <StackPanel Width="250">
                         <Label Content="Autos:" FontSize="15" Margin="10 0 0 0"/>
-                        <ListBox x:Name="AutoList" ItemsSource="{Binding Autos}" ItemTemplate="{StaticResource AutoTemplate}" Margin="10 0 10 0" Height="226" IsSynchronizedWithCurrentItem="True"/>
+                        <ListBox x:Name="AutoList" ItemsSource="{Binding Autos}" ItemTemplate="{StaticResource AutoTemplate}" SelectedIndex="{Binding Index}"  Margin="10 0 10 0" Height="226" IsSynchronizedWithCurrentItem="True"/>
                         <StackPanel Orientation="Horizontal">
-                            <Button>
+                            <Button Command="{Binding AddButtonClick}">
                                 <fa:FontAwesome Icon="PlusCircle"/>
                             </Button>
-                            <Button Name="btnDelete" Click="DeleteButton_Click">
+                            <Button Command="{Binding DeleteButtonClick}">
                                 <fa:FontAwesome Icon="MinusCircle"/>
                             </Button>
                         </StackPanel>
@@ -36,14 +36,14 @@
                     <StackPanel>
                         <Label Content="Details:" FontSize="15" Margin="15 0 0 0"/>
                         <Label Content="ID" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding ElementName=AutoList, Path=SelectedItem.Id ,Mode=OneWay}" IsEnabled="False"/>
+                        <TextBox Text="{Binding Path=CurrentAuto.Id}" IsEnabled="False"/>
                         <Label Content="Autoklasse" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding ElementName=AutoList, Path=SelectedItem.AutoKlasse, Mode=OneWay}"/>
+                        <TextBox Text="{Binding Path=CurrentAuto.AutoKlasse}"/>
                         <Label Content="Marke: " Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding ElementName=AutoList, UpdateSourceTrigger=PropertyChanged,Path=SelectedItem.Marke, Mode=OneWay}" />
+                        <TextBox Text="{Binding Path=CurrentAuto.Marke}" />
                         <Label Content="Tarif: " Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding ElementName=AutoList, Path=SelectedItem.Tagestarif, Mode=OneWay}"/>
-                        <Button x:Name="btnUpdate">
+                        <TextBox Text="{Binding Path=CurrentAuto.Tagestarif}"/>
+                        <Button Command="{Binding SaveButtonClick}">
                             <fa:FontAwesome Icon="Save"/>
                         </Button>
                     </StackPanel>

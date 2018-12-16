@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\AutoViewModel.cs" />
     <Compile Include="ViewModels\BindableBase.cs" />
+    <Compile Include="ViewModels\Commands\RelayCommand.cs" />
     <Page Include="AdminGUI.Resources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
