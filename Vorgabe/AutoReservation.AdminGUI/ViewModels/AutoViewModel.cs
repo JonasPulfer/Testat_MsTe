@@ -1,5 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
 using AutoReservation.AdminGUI.ViewModels.Commands;
 using AutoReservation.Common.DataTransferObjects;
 
@@ -8,15 +15,87 @@ namespace AutoReservation.AdminGUI.ViewModels
     class AutoViewModel : BindableBase
     {
         private int _index;
+        private int _counter;
 
         public AutoViewModel()
         {
             Autos = Target.GetAutoList();
+
             DeleteButtonClick = new RelayCommand(DeleteAuto, () => CanDeleteAuto);
             SaveButtonClick = new RelayCommand(Save, () => CanSave);
             AddButtonClick = new RelayCommand(Add);
+            SortCommand = new RelayCommand<object>(Sort);
 
             Index = -1;
+        }
+
+
+        public RelayCommand<object> SortCommand { get; set; }
+
+        public void Sort(object parameter)
+        {
+            
+            string column = parameter as string;
+            List<AutoDto> AutosSorted;
+            switch (column)
+            {
+                case "Marke":
+                    if(_counter == 1)
+                    {
+                        AutosSorted = Autos
+                           .OrderByDescending(s => s.Marke)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter = 0;
+                    } else
+                    {
+                        AutosSorted = Autos
+                           .OrderBy(s => s.Marke)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter++;
+                    }
+                    break;
+                case "Autoklasse":
+                    if (_counter == 1)
+                    {
+                        AutosSorted = Autos
+                           .OrderByDescending(s => s.AutoKlasse)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter = 0;
+                    }
+                    else
+                    {
+                        AutosSorted = Autos
+                           .OrderBy(s => s.AutoKlasse)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter++;
+                    }
+                    break;
+                case "Tarif":
+                    if (_counter == 1)
+                    {
+                        AutosSorted = Autos
+                           .OrderByDescending(s => s.Tagestarif)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter = 0;
+                    }
+                    else
+                    {
+                        AutosSorted = Autos
+                           .OrderBy(s => s.Tagestarif)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter++;
+                    }
+                    break;
+
+            }
+
+            OnPropertyChanged(nameof(Autos));
         }
 
         public int Index
@@ -34,7 +113,6 @@ namespace AutoReservation.AdminGUI.ViewModels
         public RelayCommand DeleteButtonClick { get; set; }
         public RelayCommand SaveButtonClick { get; set; }
         public RelayCommand AddButtonClick { get; set; }
-
         public AutoDto CurrentAuto { get; set; }
 
         public void SelectedIndexChanged()
@@ -50,10 +128,16 @@ namespace AutoReservation.AdminGUI.ViewModels
         public void Add()
         {
             Index = -1;
+
             CurrentAuto = new AutoDto();
+
+
+            OnPropertyChanged(nameof(CurrentAuto));
+
 
             SaveButtonClick.RaiseCanExecuteChanged();
         }
+
 
         public bool CheckInput()
         {
