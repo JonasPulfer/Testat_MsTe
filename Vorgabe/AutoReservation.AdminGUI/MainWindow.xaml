@@ -23,13 +23,16 @@
                 <DockPanel DockPanel.Dock="Left">
                     <StackPanel Width="250">
                         <Label Content="Autos:" FontSize="15" Margin="10 0 0 0"/>
-                        <ListBox x:Name="AutoList" ItemsSource="{Binding Autos}" ItemTemplate="{StaticResource AutoTemplate}" SelectedIndex="{Binding Index}"  Margin="10 0 10 0" Height="226" IsSynchronizedWithCurrentItem="True"/>
+                        <ListBox x:Name="AutoList" ItemsSource="{Binding Autos}" ItemTemplate="{StaticResource AutoTemplate}" SelectedIndex="{Binding Index}" IsSynchronizedWithCurrentItem="True"/>
                         <StackPanel Orientation="Horizontal">
                             <Button Command="{Binding AddButtonClick}">
                                 <fa:FontAwesome Icon="PlusCircle"/>
                             </Button>
                             <Button Command="{Binding DeleteButtonClick}">
                                 <fa:FontAwesome Icon="MinusCircle"/>
+                            </Button>
+                            <Button Command="{Binding RefreshButtonClick}" HorizontalAlignment="Right">
+
                             </Button>
                         </StackPanel>
                     </StackPanel>
@@ -38,7 +41,7 @@
                         <Label Content="ID" Margin="{StaticResource DetailViewLabelMargin}"/>
                         <TextBox Text="{Binding Path=CurrentAuto.Id}" IsEnabled="False"/>
                         <Label Content="Autoklasse" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding Path=CurrentAuto.AutoKlasse}"/>
+                        <ComboBox ItemsSource="{Binding Path=AutoKlassen}" SelectedItem="{Binding CurrentAuto.AutoKlasse}"/>
                         <Label Content="Marke: " Margin="{StaticResource DetailViewLabelMargin}"/>
                         <TextBox Text="{Binding Path=CurrentAuto.Marke}" />
                         <Label Content="Tarif: " Margin="{StaticResource DetailViewLabelMargin}"/>
@@ -50,62 +53,74 @@
                 </DockPanel>
             </TabItem>
             <TabItem Header="Kunden">
+                <TabItem.DataContext>
+                    <ViewModels:KundeViewModel />
+                </TabItem.DataContext>
                 <DockPanel DockPanel.Dock="Left">
                     <StackPanel Width="250">
                         <Label Content="Kunden:" FontSize="15" Margin="10 0 0 0"/>
-                        <ListBox x:Name="KundenList" ItemsSource="{Binding Kunden}" ItemTemplate="{StaticResource KundeTemplate}" Margin="10 0 10 0"/>
+                        <ListBox x:Name="KundenList" ItemsSource="{Binding Kunden}" ItemTemplate="{StaticResource KundeTemplate}" SelectedIndex="{Binding Index}" IsSynchronizedWithCurrentItem="True"/>
                         <StackPanel Orientation="Horizontal">
-                            <Button>
+                            <Button Command="{Binding AddButtonClick}">
                                 <fa:FontAwesome Icon="PlusCircle"/>
                             </Button>
-                            <Button>
+                            <Button Command="{Binding DeleteButtonClick}">
                                 <fa:FontAwesome Icon="MinusCircle"/>
+                            </Button>
+                            <Button Command="{Binding RefreshButtonClick}" HorizontalAlignment="Right">
+
                             </Button>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel>
                         <Label Content="Details:" FontSize="15" Margin="15 0 0 0"/>
                         <Label Content="ID" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding Id}"/>
+                        <TextBox Text="{Binding CurrentKunde.Id}" IsEnabled="False"/>
                         <Label Content="Vorname" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding Vorname}"/>
+                        <TextBox Text="{Binding CurrentKunde.Vorname}"/>
                         <Label Content="Nachname: " Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding Nachname}" />
+                        <TextBox Text="{Binding CurrentKunde.Nachname}" />
                         <Label Content="Geburtsdatum:" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding Geburtsdatum}"/>
-                        <Button>
+                        <DatePicker SelectedDate="{Binding CurrentKunde.Geburtsdatum, StringFormat={}dd.MM.yyyy}" />
+                        <Button Command="{Binding SaveButtonClick}">
                             <fa:FontAwesome Icon="Save"/>
                         </Button>
                     </StackPanel>
                 </DockPanel>
             </TabItem>
             <TabItem Header="Reservationen">
+                <TabItem.DataContext>
+                    <ViewModels:ReservationViewModel />
+                </TabItem.DataContext>
                 <DockPanel DockPanel.Dock="Left">
                     <StackPanel Width="250">
                         <Label Content="Reservationen:" FontSize="15" Margin="10 0 0 0"/>
-                        <ListBox x:Name="ReservationList" ItemsSource="{Binding AllReservations}" ItemTemplate="{StaticResource ReservationTemplate}" Margin="10 0 10 0"/>
+                        <ListBox x:Name="ReservationList" ItemsSource="{Binding Reservationen}" ItemTemplate="{StaticResource ReservationTemplate}" SelectedIndex="{Binding Index}"/>
                         <StackPanel Orientation="Horizontal">
-                            <Button>
+                            <Button Command="{Binding AddButtonClick}">
                                 <fa:FontAwesome Icon="PlusCircle"/>
                             </Button>
-                            <Button>
+                            <Button Command="{Binding DeleteButtonClick}">
                                 <fa:FontAwesome Icon="MinusCircle"/>
+                            </Button>
+                            <Button Command="{Binding RefreshButtonClick}" HorizontalAlignment="Right">
+
                             </Button>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel>
                         <Label Content="Details:" FontSize="15" Margin="15 0 0 0"/>
                         <Label Content="ReservationsNr:" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding ReservationsNr}"/>
-                        <Label Content="Auto Id:" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding AutoId}"/>
-                        <Label Content="Kunde Id: " Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding KundeId}" />
+                        <TextBox Text="{Binding CurrentReservation.ReservationsNr}" IsEnabled="False"/>
+                        <Label Content="Auto:" Margin="{StaticResource DetailViewLabelMargin}"/>
+                        <ComboBox ItemsSource="{Binding Autos}" SelectedItem="{Binding CurrentReservation.Auto}"/>
+                        <Label Content="Kunde: " Margin="{StaticResource DetailViewLabelMargin}"/>
+                        <ComboBox ItemsSource="{Binding Kunden}" SelectedItem="{Binding CurrentReservation.Kunde}"/>
                         <Label Content="Von: " Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding Von}"/>
+                        <DatePicker SelectedDate="{Binding CurrentReservation.Von}"/>
                         <Label Content="Bis: " Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Text="{Binding Bis}"/>
-                        <Button>
+                        <DatePicker SelectedDate="{Binding CurrentReservation.Bis}"/>
+                        <Button Command="{Binding SaveButtonClick}">
                             <fa:FontAwesome Icon="Save"/>
                         </Button>
                     </StackPanel>
