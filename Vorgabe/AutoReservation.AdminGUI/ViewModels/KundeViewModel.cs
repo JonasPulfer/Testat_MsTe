@@ -23,6 +23,7 @@ namespace AutoReservation.AdminGUI.ViewModels
                 SelectedIndexChanged();
             }
         }
+
         public bool CanDeleteKunde => CurrentKunde != null;
         public bool CanSaveKunde => CurrentKunde != null;
 
@@ -42,6 +43,12 @@ namespace AutoReservation.AdminGUI.ViewModels
             if (Index >= 0)
             {
                 CurrentKunde = Kunden[Index];
+                DeleteButtonClick.RaiseCanExecuteChanged();
+                OnPropertyChanged(nameof(CurrentKunde));
+            }
+            else
+            {
+                CurrentKunde = null;
                 DeleteButtonClick.RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(CurrentKunde));
             }

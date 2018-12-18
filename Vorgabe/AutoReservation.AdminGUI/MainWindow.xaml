@@ -23,7 +23,7 @@
                 <DockPanel DockPanel.Dock="Left">
                     <StackPanel Width="250">
                         <Label Content="Autos:" FontSize="15" Margin="10 0 0 0"/>
-                        <ListBox x:Name="AutoList" ItemsSource="{Binding Autos}" ItemTemplate="{StaticResource AutoTemplate}" SelectedIndex="{Binding Index}" IsSynchronizedWithCurrentItem="True"/>
+                        <ListBox x:Name="AutoList" ItemsSource="{Binding Autos}" ItemTemplate="{StaticResource AutoTemplate}" SelectedIndex="{Binding Index}"/>
                         <StackPanel Orientation="Horizontal">
                             <Button Command="{Binding AddButtonClick}">
                                 <fa:FontAwesome Icon="PlusCircle"/>
@@ -59,7 +59,7 @@
                 <DockPanel DockPanel.Dock="Left">
                     <StackPanel Width="250">
                         <Label Content="Kunden:" FontSize="15" Margin="10 0 0 0"/>
-                        <ListBox x:Name="KundenList" ItemsSource="{Binding Kunden}" ItemTemplate="{StaticResource KundeTemplate}" SelectedIndex="{Binding Index}" IsSynchronizedWithCurrentItem="True"/>
+                        <ListBox x:Name="KundenList" ItemsSource="{Binding Kunden}" ItemTemplate="{StaticResource KundeTemplate}" SelectedIndex="{Binding Index}"/>
                         <StackPanel Orientation="Horizontal">
                             <Button Command="{Binding AddButtonClick}">
                                 <fa:FontAwesome Icon="PlusCircle"/>
@@ -113,9 +113,9 @@
                         <Label Content="ReservationsNr:" Margin="{StaticResource DetailViewLabelMargin}"/>
                         <TextBox Text="{Binding CurrentReservation.ReservationsNr}" IsEnabled="False"/>
                         <Label Content="Auto:" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <ComboBox ItemsSource="{Binding Autos}" SelectedItem="{Binding CurrentReservation.Auto}"/>
+                        <ComboBox ItemsSource="{Binding Autos}" SelectedIndex="{Binding AutoIndex}"/>
                         <Label Content="Kunde: " Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <ComboBox ItemsSource="{Binding Kunden}" SelectedItem="{Binding CurrentReservation.Kunde}"/>
+                        <ComboBox ItemsSource="{Binding Kunden}" SelectedIndex="{Binding KundeIndex}"/>
                         <Label Content="Von: " Margin="{StaticResource DetailViewLabelMargin}"/>
                         <DatePicker SelectedDate="{Binding CurrentReservation.Von}"/>
                         <Label Content="Bis: " Margin="{StaticResource DetailViewLabelMargin}"/>
