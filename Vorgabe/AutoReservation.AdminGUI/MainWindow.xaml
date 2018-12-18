@@ -23,26 +23,12 @@
                 <DockPanel DockPanel.Dock="Left">
                     <StackPanel Width="250">
                         <Label Content="Autos:" FontSize="15" Margin="10 0 0 0"/>
-                        <ListView x:Name="AutoList" ItemsSource="{Binding Autos}" ItemTemplate="{StaticResource AutoTemplate}" SelectedIndex="{Binding Index}"  Margin="10 0 10 0" Height="226" IsSynchronizedWithCurrentItem="True">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Width="80" DisplayMemberBinding="{Binding Marke}" >
-                                        <GridViewColumnHeader Content="Marke" Command="{Binding SortCommand}" CommandParameter="Marke"></GridViewColumnHeader>
-                                    </GridViewColumn>
-                                    <GridViewColumn Width="80" DisplayMemberBinding="{Binding AutoKlasse}">
-                                        <GridViewColumnHeader Content="Autoklasse" Command="{Binding SortCommand}" CommandParameter="Autoklasse"></GridViewColumnHeader>
-                                    </GridViewColumn>
-                                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Tagestarif}">
-                                        <GridViewColumnHeader Content="Tarif" Command="{Binding SortCommand}" CommandParameter="Tarif"></GridViewColumnHeader>
-                                    </GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <ListBox x:Name="AutoList" ItemsSource="{Binding Autos}" ItemTemplate="{StaticResource AutoTemplate}" SelectedIndex="{Binding Index}"  Margin="10 0 10 0" Height="226" IsSynchronizedWithCurrentItem="True"/>
                         <StackPanel Orientation="Horizontal">
-                            <Button Style="{DynamicResource FaButton}" Command="{Binding AddButtonClick}">
+                            <Button Command="{Binding AddButtonClick}">
                                 <fa:FontAwesome Icon="PlusCircle"/>
                             </Button>
-                            <Button Style="{DynamicResource FaButton}" Command="{Binding DeleteButtonClick}">
+                            <Button Command="{Binding DeleteButtonClick}">
                                 <fa:FontAwesome Icon="MinusCircle"/>
                             </Button>
                         </StackPanel>
@@ -50,14 +36,14 @@
                     <StackPanel>
                         <Label Content="Details:" FontSize="15" Margin="15 0 0 0"/>
                         <Label Content="ID" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Name="id" Text="{Binding Path=CurrentAuto.Id}" IsEnabled="False"/>
+                        <TextBox Text="{Binding Path=CurrentAuto.Id}" IsEnabled="False"/>
                         <Label Content="Autoklasse" Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Name="autoklasse" Text="{Binding Path=CurrentAuto.AutoKlasse}"/>
+                        <TextBox Text="{Binding Path=CurrentAuto.AutoKlasse}"/>
                         <Label Content="Marke: " Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Name="marke" Text="{Binding Path=CurrentAuto.Marke}" />
+                        <TextBox Text="{Binding Path=CurrentAuto.Marke}" />
                         <Label Content="Tarif: " Margin="{StaticResource DetailViewLabelMargin}"/>
-                        <TextBox Name="tarif" Text="{Binding Path=CurrentAuto.Tagestarif}"/>
-                        <Button Style="{DynamicResource FaButton}" Command="{Binding SaveButtonClick}">
+                        <TextBox Text="{Binding Path=CurrentAuto.Tagestarif}"/>
+                        <Button Command="{Binding SaveButtonClick}">
                             <fa:FontAwesome Icon="Save"/>
                         </Button>
                     </StackPanel>
