@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using AutoReservation.AdminGUI.ViewModels.Commands;
 using AutoReservation.Common.DataTransferObjects;
@@ -8,6 +9,7 @@ namespace AutoReservation.AdminGUI.ViewModels
     class AutoViewModel : BindableBase
     {
         private int _index;
+        private int _counter;
 
         public AutoViewModel()
         {
@@ -16,6 +18,7 @@ namespace AutoReservation.AdminGUI.ViewModels
             SaveButtonClick = new RelayCommand(SaveAuto, () => CanSave);
             AddButtonClick = new RelayCommand(AddAuto);
             RefreshButtonClick = new RelayCommand(Refresh);
+            SortCommand = new RelayCommand<object>(Sort);
             AutoKlassen = new List<AutoKlasse> {AutoKlasse.Luxusklasse, AutoKlasse.Mittelklasse, AutoKlasse.Standard};
 
             Index = -1;
@@ -37,6 +40,7 @@ namespace AutoReservation.AdminGUI.ViewModels
         public RelayCommand DeleteButtonClick { get; set; }
         public RelayCommand SaveButtonClick { get; set; }
         public RelayCommand AddButtonClick { get; set; }
+        public RelayCommand<object> SortCommand { get; set; }
         public RelayCommand RefreshButtonClick { get; set; }
 
         public AutoDto CurrentAuto { get; set; }
@@ -58,6 +62,72 @@ namespace AutoReservation.AdminGUI.ViewModels
 
             OnPropertyChanged(nameof(CurrentAuto));
             SaveButtonClick.RaiseCanExecuteChanged();
+        }
+        public void Sort(object parameter)
+        {
+
+            string column = parameter as string;
+            List<AutoDto> AutosSorted;
+            switch (column)
+            {
+                case "Marke":
+                    if (_counter == 1)
+                    {
+                        AutosSorted = Autos
+                           .OrderByDescending(s => s.Marke)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter = 0;
+                    }
+                    else
+                    {
+                        AutosSorted = Autos
+                           .OrderBy(s => s.Marke)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter++;
+                    }
+                    break;
+                case "Autoklasse":
+                    if (_counter == 1)
+                    {
+                        AutosSorted = Autos
+                           .OrderByDescending(s => s.AutoKlasse)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter = 0;
+                    }
+                    else
+                    {
+                        AutosSorted = Autos
+                           .OrderBy(s => s.AutoKlasse)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter++;
+                    }
+                    break;
+                case "Tarif":
+                    if (_counter == 1)
+                    {
+                        AutosSorted = Autos
+                           .OrderByDescending(s => s.Tagestarif)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter = 0;
+                    }
+                    else
+                    {
+                        AutosSorted = Autos
+                           .OrderBy(s => s.Tagestarif)
+                           .ToList();
+                        Autos = AutosSorted;
+                        _counter++;
+                    }
+                    break;
+
+            }
+
+            OnPropertyChanged(nameof(Autos));
         }
 
         public bool CheckInput()

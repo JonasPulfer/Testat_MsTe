@@ -33,25 +33,32 @@
 
     <Thickness x:Key="DetailViewLabelMargin" Left="25" Top="0" Right="0" Bottom="0"></Thickness>
 
-    <Style TargetType="Button" >
-        <Setter Property="Template" >
+    
+    <Style x:Key="FaButton" TargetType="Button">
+        <Setter Property="Width" Value="32"></Setter>
+        <Setter Property="Height" Value="32"></Setter>
+        <Setter Property="FontSize" Value="16"></Setter>
+        <Setter Property="Margin" Value="2"></Setter>
+        <Setter Property="Foreground" Value="Aquamarine"></Setter>
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="30" BorderBrush="#1ba1e2" BorderThickness="1" Margin="2" Padding="2" >
-                        <DockPanel Height="40" Width="40" >
-                            <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
-                        </DockPanel>
-                    </Border>
-
+                <ControlTemplate TargetType="{x:Type Button}" >
+                    <Grid>
+                        <Ellipse Stroke="{TemplateBinding Foreground}" StrokeThickness="1"
+Fill="{TemplateBinding Background}">
+                        </Ellipse>
+                        <ContentPresenter Content="{TemplateBinding Content}"
+HorizontalAlignment="Center"
+VerticalAlignment="Center" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Foreground" Value="#1ba1e2"/>
-        <Setter Property="Border.Background" Value="Black" />
         <Style.Triggers>
-            <Trigger Property="Button.IsMouseOver" Value="True" >
-                <Setter Property="Button.Foreground" Value="Black" />
-                <Setter Property="Button.BorderBrush" Value="red" />
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource AccentColorBrush}"></Setter>
+                <Setter Property="Foreground" Value="White"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

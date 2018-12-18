@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using System.Windows;
 using AutoReservation.AdminGUI.ViewModels.Commands;
@@ -10,6 +11,7 @@ namespace AutoReservation.AdminGUI.ViewModels
     class ReservationViewModel : BindableBase
     {
         private int _index;
+        private int _counter;
         public List<ReservationDto> Reservationen { get; set; }
         public List<KundeDto> Kunden { get; set; }
         public List<AutoDto> Autos { get; set; }
@@ -17,6 +19,7 @@ namespace AutoReservation.AdminGUI.ViewModels
         public RelayCommand SaveButtonClick { get; set; }
         public RelayCommand AddButtonClick { get; set; }
         public RelayCommand RefreshButtonClick { get; set; }
+        public RelayCommand<object> SortCommand { get; set; }
         public ReservationDto CurrentReservation { get; set; }
         public int AutoIndex { get; set; }
         public int KundeIndex { get; set; }
@@ -42,6 +45,7 @@ namespace AutoReservation.AdminGUI.ViewModels
             SaveButtonClick = new RelayCommand(SaveReservation, () => CanSaveReservation);
             AddButtonClick = new RelayCommand(AddReservation);
             RefreshButtonClick = new RelayCommand(Refresh);
+            SortCommand = new RelayCommand<object>(Sort);
 
             Index = -1;
             AutoIndex = -1;
@@ -77,6 +81,90 @@ namespace AutoReservation.AdminGUI.ViewModels
             SaveButtonClick.RaiseCanExecuteChanged();
         }
 
+        public void Sort(object parameter)
+        {
+
+            string column = parameter as string;
+            List<ReservationDto> ReservationSorted;
+            switch (column)
+            {
+                case "Auto":
+                    if (_counter == 1)
+                    {
+                        ReservationSorted = Reservationen
+                           .OrderByDescending(s => s.Auto.Marke)
+                           .ToList();
+                        Reservationen = ReservationSorted;
+                        _counter = 0;
+                    }
+                    else
+                    {
+                        ReservationSorted = Reservationen
+                           .OrderBy(s => s.Auto.Marke)
+                           .ToList();
+                        Reservationen = ReservationSorted;
+                        _counter++;
+                    }
+                    break;
+                case "Kunde":
+                    if (_counter == 1)
+                    {
+                        ReservationSorted = Reservationen
+                            .OrderByDescending(s => s.Kunde.Nachname)
+                            .ToList();
+                        Reservationen = ReservationSorted;
+                        _counter = 0;
+                    }
+                    else
+                    {
+                        ReservationSorted = Reservationen
+                           .OrderBy(s => s.Kunde.Nachname)
+                           .ToList();
+                        Reservationen = ReservationSorted;
+                        _counter++;
+                    }
+                    break;
+                case "Bis":
+                    if (_counter == 1)
+                    {
+                        ReservationSorted = Reservationen
+                           .OrderByDescending(s => s.Bis)
+                           .ToList();
+                        Reservationen = ReservationSorted;
+                        _counter = 0;
+                    }
+                    else
+                    {
+                        ReservationSorted = Reservationen
+                           .OrderBy(s => s.Bis)
+                           .ToList();
+                        Reservationen = ReservationSorted;
+                        _counter++;
+                    }
+                    break;
+                case "Von":
+                    if (_counter == 1)
+                    {
+                        ReservationSorted = Reservationen
+                           .OrderByDescending(s => s.Von)
+                           .ToList();
+                        Reservationen = ReservationSorted;
+                        _counter = 0;
+                    }
+                    else
+                    {
+                        ReservationSorted = Reservationen
+                           .OrderBy(s => s.Von)
+                           .ToList();
+                        Reservationen = ReservationSorted;
+                        _counter++;
+                    }
+                    break;
+
+            }
+
+            OnPropertyChanged(nameof(Reservationen));
+        }
         public bool CheckInput()
         {
             if (Autos[AutoIndex] == null || Kunden[KundeIndex] == null || CurrentReservation.Von.ToShortDateString() == "" || CurrentReservation.Bis.ToShortDateString() == "")
