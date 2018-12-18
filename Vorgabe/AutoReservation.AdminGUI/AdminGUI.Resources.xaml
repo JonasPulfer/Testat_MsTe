@@ -31,7 +31,7 @@
         </StackPanel>
     </DataTemplate>
 
-    <Thickness x:Key="DetailViewLabelMargin" Left="25" Top="0" Right="0" Bottom="0"></Thickness>
+    <Thickness x:Key="DetailViewLabelMargin" Left="0" Top="0" Right="0" Bottom="0"></Thickness>
 
     
     <Style x:Key="FaButton" TargetType="Button">
@@ -64,16 +64,11 @@ VerticalAlignment="Center" />
     </Style>
 
     <Style TargetType="TextBox">
-        <Setter Property="Margin" Value="30 0 20 0"></Setter>
+        <Setter Property="Margin" Value="5 0 20 0"></Setter>
     </Style>
 
     <Style TargetType="ComboBox">
-        <Setter Property="Margin" Value="30 0 20 0"></Setter>
-    </Style>
-
-    <Style TargetType="ListBox">
-        <Setter Property="Margin" Value="10 0 10 0" />
-        <Setter Property="Height" Value="230"></Setter>
+        <Setter Property="Margin" Value="5 0 20 0"></Setter>
     </Style>
 
     <Style TargetType="TabControl">
@@ -81,7 +76,7 @@ VerticalAlignment="Center" />
     </Style>
 
     <Style TargetType="DatePicker">
-        <Setter Property="Margin" Value="30 0 20 0"></Setter>
+        <Setter Property="Margin" Value="5 0 20 0"></Setter>
     </Style>
 
     <Style TargetType="Label">
