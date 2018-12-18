@@ -24,6 +24,10 @@
 
     <DataTemplate x:Key="ReservationTemplate">
         <StackPanel Orientation="Horizontal">
+            <Label Content="Kunde: " Foreground="Black"></Label>
+            <Label Content="{Binding Kunde.Nachname}" Foreground="Black"></Label>
+            <Label Content="Auto: " Foreground="Black"></Label>
+            <Label Content="{Binding Auto.Marke}" Foreground="Black"></Label>
         </StackPanel>
     </DataTemplate>
 
@@ -56,8 +60,21 @@
         <Setter Property="Margin" Value="30 0 20 0"></Setter>
     </Style>
 
+    <Style TargetType="ComboBox">
+        <Setter Property="Margin" Value="30 0 20 0"></Setter>
+    </Style>
+
+    <Style TargetType="ListBox">
+        <Setter Property="Margin" Value="10 0 10 0" />
+        <Setter Property="Height" Value="230"></Setter>
+    </Style>
+
     <Style TargetType="TabControl">
         <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style TargetType="DatePicker">
+        <Setter Property="Margin" Value="30 0 20 0"></Setter>
     </Style>
 
     <Style TargetType="Label">

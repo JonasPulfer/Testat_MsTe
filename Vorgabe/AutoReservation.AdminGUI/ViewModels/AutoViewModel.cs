@@ -13,8 +13,10 @@ namespace AutoReservation.AdminGUI.ViewModels
         {
             Autos = Target.GetAutoList();
             DeleteButtonClick = new RelayCommand(DeleteAuto, () => CanDeleteAuto);
-            SaveButtonClick = new RelayCommand(Save, () => CanSave);
-            AddButtonClick = new RelayCommand(Add);
+            SaveButtonClick = new RelayCommand(SaveAuto, () => CanSave);
+            AddButtonClick = new RelayCommand(AddAuto);
+            RefreshButtonClick = new RelayCommand(Refresh);
+            AutoKlassen = new List<AutoKlasse> {AutoKlasse.Luxusklasse, AutoKlasse.Mittelklasse, AutoKlasse.Standard};
 
             Index = -1;
         }
@@ -30,10 +32,12 @@ namespace AutoReservation.AdminGUI.ViewModels
         }
 
         public List<AutoDto> Autos { get; set; }
+        public List<AutoKlasse> AutoKlassen { get; set; }
 
         public RelayCommand DeleteButtonClick { get; set; }
         public RelayCommand SaveButtonClick { get; set; }
         public RelayCommand AddButtonClick { get; set; }
+        public RelayCommand RefreshButtonClick { get; set; }
 
         public AutoDto CurrentAuto { get; set; }
 
@@ -47,11 +51,12 @@ namespace AutoReservation.AdminGUI.ViewModels
             }
         }
 
-        public void Add()
+        public void AddAuto()
         {
             Index = -1;
             CurrentAuto = new AutoDto();
 
+            OnPropertyChanged(nameof(CurrentAuto));
             SaveButtonClick.RaiseCanExecuteChanged();
         }
 
@@ -73,7 +78,7 @@ namespace AutoReservation.AdminGUI.ViewModels
             return true;
         }
 
-        public void Save()
+        public void SaveAuto()
         {
             if (!CheckInput())
             {
